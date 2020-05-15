@@ -21,7 +21,8 @@ public class Hotel {
         endDate.setTime(end);
         return rooms.get(roomNumber).addReservation(startDate, endDate, guestName, specialWish);
     }
-    public ArrayList<Room> getEmptyRooms(Date start, Date end){
+
+    public ArrayList<Room> getEmptyRooms(Date start, Date end) {
         Calendar startDate = Calendar.getInstance();
         startDate.setTime(start);
         Calendar endDate = Calendar.getInstance();
@@ -37,7 +38,8 @@ public class Hotel {
 
         return emptyRooms;
     }
-    public void removeAllReservations(int roomNumber){
+
+    public void removeAllReservations(int roomNumber) {
         rooms.get(roomNumber).removeReservations();
     }
 
@@ -52,7 +54,8 @@ public class Hotel {
             System.out.println("Room " + room.roomNumber + " busy days " + busyDays);
         }
     }
-    public Room getRoom(Date start, Date end, int bedNumber){
+
+    public Room getRoom(Date start, Date end, int bedNumber) {
         Calendar startDate = Calendar.getInstance();
         startDate.setTime(start);
         Calendar endDate = Calendar.getInstance();

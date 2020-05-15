@@ -56,7 +56,7 @@ public class Room {
                 busyDays += Duration.between(reservation.getStart().toInstant(), reservation.getEnd().toInstant()).toDays();
             } else if (reservation.getStart().before(end) &&
                     reservation.getEnd().after(end)) {// res start before end res end after end
-               busyDays += Duration.between(reservation.getStart().toInstant(), end.toInstant()).toDays();
+                busyDays += Duration.between(reservation.getStart().toInstant(), end.toInstant()).toDays();
             } else if (reservation.getStart().before(start) &&
                     reservation.getEnd().after(end)) {// res start before start, res end after end
                 busyDays += Duration.between(start.toInstant(), end.toInstant()).toDays();

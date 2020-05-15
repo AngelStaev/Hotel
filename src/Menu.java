@@ -22,13 +22,16 @@ public class Menu {
         System.out.println("* 3. Remove all reservation for a room                      *");
         System.out.println("* 4. Reservation report                            *");
         System.out.println("* 5. Choose room with number of beds     *");
-        System.out.println("* 6. Load program data back from the file            *");
         System.out.println("* 0. Quit Program                                    *");
         System.out.println("======================================================");
 
         do {
             System.out.println("Choose one of the options from above. (E.g: Type '4' to view all the rooms)");
             int option = input.nextInt();
+            if (option == 0) {
+                break;
+            }
+
             chooseOptionFromMenu(option);
         } while (true);
     }
@@ -136,7 +139,7 @@ public class Menu {
         try {
             Date start = new SimpleDateFormat("dd/MM/yyyy").parse(startDate);
             Date end = new SimpleDateFormat("dd/MM/yyyy").parse(endDate);
-            boolean isSuccess = hotel.reserve(roomNumber, start, end, guestName,specialWish);
+            boolean isSuccess = hotel.reserve(roomNumber, start, end, guestName, specialWish);
             if (isSuccess) {
                 System.out.println("Successful reservation");
             } else {
