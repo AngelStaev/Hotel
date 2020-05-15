@@ -21,8 +21,8 @@ public class Menu {
         System.out.println("======================================================");
         System.out.println("* 1. Reserve room                            *");
         System.out.println("* 2. Show empty rooms                         *");
-        System.out.println("* 3. Delete customer from room                       *");
-        System.out.println("* 4. View all the rooms                              *");
+        System.out.println("* 3. Remove all reservation for a room                      *");
+        System.out.println("* 4. Reservation report                            *");
         System.out.println("* 5. Store program array data into a text file       *");
         System.out.println("* 6. Load program data back from the file            *");
         System.out.println("* 0. Quit Program                                    *");
@@ -45,9 +45,38 @@ public class Menu {
                 showEmptyRooms();
                 break;
             }
+            case 3: {
+                removeAllReservationForARoom();
+                break;
+            }
+            case 4: {
+                reservationReport();
+                break;
+            }
 
 
         }
+    }
+
+    private void reservationReport() {
+        System.out.println("Enter start date dd/MM/yyyy");
+        String startDate = input.next();
+        System.out.println("Enter end date dd/MM/yyyy");
+        String endDate = input.next();
+
+        try {
+            Date start = new SimpleDateFormat("dd/MM/yyyy").parse(startDate);
+            Date end = new SimpleDateFormat("dd/MM/yyyy").parse(endDate);
+            hotel.getReservationReport(start, end);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void removeAllReservationForARoom() {
+        System.out.println("Enter room number");
+        int roomNumber = input.nextInt();
+        hotel.removeAllReservations(roomNumber);
     }
 
     private void showEmptyRooms() {
@@ -60,7 +89,7 @@ public class Menu {
             Date start = new SimpleDateFormat("dd/MM/yyyy").parse(startDate);
             Date end = new SimpleDateFormat("dd/MM/yyyy").parse(endDate);
             ArrayList<Room> emptyRooms = hotel.getEmptyRooms(start, end);
-            for (Room room: emptyRooms) {
+            for (Room room : emptyRooms) {
                 System.out.println("empty room " + room.roomNumber);
             }
         } catch (ParseException e) {

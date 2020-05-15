@@ -37,4 +37,20 @@ public class Hotel {
 
         return emptyRooms;
     }
+    public void removeAllReservations(int roomNumber){
+        rooms.get(roomNumber).removeReservations();
+    }
+
+    public void getReservationReport(Date start, Date end) {
+        Calendar startDate = Calendar.getInstance();
+        startDate.setTime(start);
+        Calendar endDate = Calendar.getInstance();
+        endDate.setTime(end);
+
+        for (Room room : rooms) {
+            int busyDays = room.getBusyDays(startDate, endDate);
+            System.out.println("Room " + room.roomNumber + " busy days " + busyDays);
+        }
+    }
+
 }
