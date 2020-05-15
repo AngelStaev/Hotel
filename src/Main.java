@@ -4,6 +4,6 @@ public class Main {
 
     public static void main(String[] args) {
         Menu start = new Menu(new Hotel());
-
+        start.initializeMenu();
     }
 }

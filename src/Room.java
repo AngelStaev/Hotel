@@ -6,17 +6,19 @@ import java.util.List;
 public class Room {
 
     int roomNumber;
+    int beds;
     List<Reservation> reservations;
 
-    public Room(int roomNumber) {
+    public Room(int roomNumber, int beds) {
         this.roomNumber = roomNumber;
+        this.beds = beds;
         this.reservations = new ArrayList<>();
     }
 
-    public boolean addReservation(Calendar start, Calendar end, String name) {
+    public boolean addReservation(Calendar start, Calendar end, String name, String specialWish) {
         boolean available = isAvailable(start, end);
         if (available) {
-            Reservation reservation = new Reservation(start, end, name);
+            Reservation reservation = new Reservation(start, end, name, specialWish);
             reservations.add(reservation);
         }
 
@@ -62,5 +64,9 @@ public class Room {
         }
 
         return busyDays;
+    }
+
+    public boolean isAvailable(Calendar startDate, Calendar endDate, int bedNumber) {
+        return isAvailable(startDate, endDate) && this.beds >= bedNumber;
     }
 }

@@ -2,14 +2,16 @@ import java.util.Calendar;
 
 public class Reservation {
 
+    private String specialWish;
     private Calendar start;
     private Calendar end;
     private String guestName;
 
-    public Reservation(Calendar start, Calendar end, String guestName) {
+    public Reservation(Calendar start, Calendar end, String guestName, String specialWish) {
         this.start = start;
         this.end = end;
         this.guestName = guestName;
+        this.specialWish = specialWish;
     }
 
     public Calendar getStart() {

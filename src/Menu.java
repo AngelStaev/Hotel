@@ -11,8 +11,6 @@ public class Menu {
 
     public Menu(Hotel hotel) {
         this.hotel = hotel;
-
-        initializeMenu();
     }
 
     public void initializeMenu() {
@@ -23,7 +21,7 @@ public class Menu {
         System.out.println("* 2. Show empty rooms                         *");
         System.out.println("* 3. Remove all reservation for a room                      *");
         System.out.println("* 4. Reservation report                            *");
-        System.out.println("* 5. Store program array data into a text file       *");
+        System.out.println("* 5. Choose room with number of beds     *");
         System.out.println("* 6. Load program data back from the file            *");
         System.out.println("* 0. Quit Program                                    *");
         System.out.println("======================================================");
@@ -53,8 +51,34 @@ public class Menu {
                 reservationReport();
                 break;
             }
+            case 5: {
+                bedsNumber();
+                break;
+            }
 
 
+        }
+    }
+
+    private void bedsNumber() {
+        System.out.println("Enter start date dd/MM/yyyy");
+        String startDate = input.next();
+        System.out.println("Enter end date dd/MM/yyyy");
+        String endDate = input.next();
+        System.out.println("How many beds do you need?");
+        int beds = input.nextInt();
+
+        try {
+            Date start = new SimpleDateFormat("dd/MM/yyyy").parse(startDate);
+            Date end = new SimpleDateFormat("dd/MM/yyyy").parse(endDate);
+            Room room = hotel.getRoom(start, end, beds);
+            if (room == null) {
+                System.out.println("Sorry, no available room");
+            } else {
+                System.out.println("You can book room " + room.roomNumber);
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
     }
 
@@ -106,11 +130,13 @@ public class Menu {
         String endDate = input.next();
         System.out.println("Enter your name");
         String guestName = input.next();
+        System.out.println("Do you want baby bed,breakfast or sea view");
+        String specialWish = input.next();
 
         try {
             Date start = new SimpleDateFormat("dd/MM/yyyy").parse(startDate);
             Date end = new SimpleDateFormat("dd/MM/yyyy").parse(endDate);
-            boolean isSuccess = hotel.reserve(roomNumber, start, end, guestName);
+            boolean isSuccess = hotel.reserve(roomNumber, start, end, guestName,specialWish);
             if (isSuccess) {
                 System.out.println("Successful reservation");
             } else {
