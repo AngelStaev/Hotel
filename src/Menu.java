@@ -19,9 +19,13 @@ public class Menu {
     }
 
     public void chooseOptionFromMenu (int option) {
+        System.out.println("Choose one of the options from above. (E.g: Type '4' to view all the rooms)");
 
         option = input.nextInt();
          switch (option) {
+
+
+
 
          }
     }
