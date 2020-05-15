@@ -1,5 +1,6 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -18,8 +19,8 @@ public class Menu {
         System.out.println("======================================================");
         System.out.println("*            Hotel Management System                 *");
         System.out.println("======================================================");
-        System.out.println("* 1. Display Empty rooms                             *");
-        System.out.println("* 2. Add customer to room                            *");
+        System.out.println("* 1. Reserve room                            *");
+        System.out.println("* 2. Show empty rooms                         *");
         System.out.println("* 3. Delete customer from room                       *");
         System.out.println("* 4. View all the rooms                              *");
         System.out.println("* 5. Store program array data into a text file       *");
@@ -34,16 +35,37 @@ public class Menu {
         } while (true);
     }
 
-    public void chooseOptionFromMenu (int option) {
-         switch (option) {
-             case 1 : {
-                 reserve();
+    public void chooseOptionFromMenu(int option) {
+        switch (option) {
+            case 1: {
+                reserve();
+                break;
+            }
+            case 2: {
+                showEmptyRooms();
                 break;
             }
 
 
+        }
+    }
 
-         }
+    private void showEmptyRooms() {
+        System.out.println("Enter start date dd/MM/yyyy");
+        String startDate = input.next();
+        System.out.println("Enter end date dd/MM/yyyy");
+        String endDate = input.next();
+
+        try {
+            Date start = new SimpleDateFormat("dd/MM/yyyy").parse(startDate);
+            Date end = new SimpleDateFormat("dd/MM/yyyy").parse(endDate);
+            ArrayList<Room> emptyRooms = hotel.getEmptyRooms(start, end);
+            for (Room room: emptyRooms) {
+                System.out.println("empty room " + room.roomNumber);
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     public void reserve() {
@@ -57,8 +79,8 @@ public class Menu {
         String guestName = input.next();
 
         try {
-            Date start =new SimpleDateFormat("dd/MM/yyyy").parse(startDate);
-            Date end =new SimpleDateFormat("dd/MM/yyyy").parse(endDate);
+            Date start = new SimpleDateFormat("dd/MM/yyyy").parse(startDate);
+            Date end = new SimpleDateFormat("dd/MM/yyyy").parse(endDate);
             boolean isSuccess = hotel.reserve(roomNumber, start, end, guestName);
             if (isSuccess) {
                 System.out.println("Successful reservation");

@@ -13,19 +13,24 @@ public class Room {
     }
 
     public boolean addReservation(Calendar start,Calendar end, String name){
+        boolean available = isAvailable(start, end);
+        if (available) {
+            Reservation reservation = new Reservation(start, end, name);
+            reservations.add(reservation);
+        }
+
+        return available;
+    }
+
+    public boolean isAvailable(Calendar start,Calendar end) {
         boolean canNotReserve = false;
         for (Reservation reservation: reservations) {
             canNotReserve =
                     (reservation.getEnd().after(start) && reservation.getStart().before(start)) ||
-                    (reservation.getStart().before(end) && reservation.getEnd().after(start));
+                            (reservation.getStart().before(end) && reservation.getEnd().after(start));
             if (canNotReserve) {
                 break;
             }
-        }
-
-        if (!canNotReserve) {
-            Reservation reservation = new Reservation(start, end, name);
-            reservations.add(reservation);
         }
 
         return !canNotReserve;

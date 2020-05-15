@@ -21,4 +21,20 @@ public class Hotel {
         endDate.setTime(end);
         return rooms.get(roomNumber).addReservation(startDate, endDate, guestName);
     }
+    public ArrayList<Room> getEmptyRooms(Date start, Date end){
+        Calendar startDate = Calendar.getInstance();
+        startDate.setTime(start);
+        Calendar endDate = Calendar.getInstance();
+        endDate.setTime(end);
+
+        ArrayList<Room> emptyRooms = new ArrayList<>();
+        for (Room room : rooms) {
+            boolean available = room.isAvailable(startDate, endDate);
+            if (available) {
+                emptyRooms.add(room);
+            }
+        }
+
+        return emptyRooms;
+    }
 }
