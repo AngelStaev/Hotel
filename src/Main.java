@@ -1,7 +1,9 @@
+import java.util.Scanner;
+
 public class Main {
 
     public static void main(String[] args) {
-        Menu start = new Menu();
+        Menu start = new Menu(new Hotel());
 
     }
 }

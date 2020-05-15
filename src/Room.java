@@ -4,10 +4,10 @@ import java.util.List;
 
 public class Room {
 
-    String roomNumber;
+    int roomNumber;
     List<Reservation> reservations;
 
-    public Room(String roomNumber) {
+    public Room(int roomNumber) {
         this.roomNumber = roomNumber;
         this.reservations = new ArrayList<>();
     }
