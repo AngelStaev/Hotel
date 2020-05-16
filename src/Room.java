@@ -45,7 +45,7 @@ public class Room {
 
     public int getBusyDays(Calendar start, Calendar end) {
         //TODO bug when reservation start == period start
-        //and reservation end is equal or bidder than the end period
+        // and reservation end is equal or bidder than the end period
         int busyDays = 0;
         for (Reservation reservation : reservations) {
             if (reservation.getStart().before(start)

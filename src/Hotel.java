@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class Hotel {
 
@@ -43,16 +40,19 @@ public class Hotel {
         rooms.get(roomNumber).removeReservations();
     }
 
-    public void getReservationReport(Date start, Date end) {
+    public Map<Integer, Integer> getReservationReport(Date start, Date end) {
         Calendar startDate = Calendar.getInstance();
         startDate.setTime(start);
         Calendar endDate = Calendar.getInstance();
         endDate.setTime(end);
 
+        Map<Integer, Integer> roomsBusyDays = new HashMap<>();
         for (Room room : rooms) {
             int busyDays = room.getBusyDays(startDate, endDate);
-            System.out.println("Room " + room.roomNumber + " busy days " + busyDays);
+            roomsBusyDays.put(room.roomNumber, busyDays);
         }
+
+        return roomsBusyDays;
     }
 
     public Room getRoom(Date start, Date end, int bedNumber) {

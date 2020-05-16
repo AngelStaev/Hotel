@@ -2,33 +2,28 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Menu {
 
-    Scanner input = new Scanner(System.in);
-    Hotel hotel;
+    private Hotel hotel;
+    private IOManager ioManager;
+    private DateUtils dateUtils;
 
-    public Menu(Hotel hotel) {
+    public Menu(Hotel hotel, IOManager ioManager, DateUtils dateUtils) {
         this.hotel = hotel;
+        this.ioManager = ioManager;
+        this.dateUtils = dateUtils;
     }
 
     public void initializeMenu() {
-        System.out.println("======================================================");
-        System.out.println("*            Hotel Management System                 *");
-        System.out.println("======================================================");
-        System.out.println("* 1. Reserve room                            *");
-        System.out.println("* 2. Show empty rooms                         *");
-        System.out.println("* 3. Remove all reservation for a room                      *");
-        System.out.println("* 4. Reservation report                            *");
-        System.out.println("* 5. Choose room with number of beds     *");
-        System.out.println("* 0. Quit Program                                    *");
-        System.out.println("======================================================");
-
         do {
-            System.out.println("Choose one of the options from above. (E.g: Type '4' to view all the rooms)");
-            int option = input.nextInt();
-            if (option == 0) {
+            ioManager.printMenu();
+            int option = ioManager.readOption();
+            if (option == -1) {
+                continue;
+            } else if (option == 0) {
                 break;
             }
 
@@ -64,89 +59,63 @@ public class Menu {
     }
 
     private void bedsNumber() {
-        System.out.println("Enter start date dd/MM/yyyy");
-        String startDate = input.next();
-        System.out.println("Enter end date dd/MM/yyyy");
-        String endDate = input.next();
-        System.out.println("How many beds do you need?");
-        int beds = input.nextInt();
+        String startDate = ioManager.readStartDate();
+        String endDate = ioManager.readEndDate();
+        int beds = ioManager.readBedsNumber();
 
-        try {
-            Date start = new SimpleDateFormat("dd/MM/yyyy").parse(startDate);
-            Date end = new SimpleDateFormat("dd/MM/yyyy").parse(endDate);
-            Room room = hotel.getRoom(start, end, beds);
-            if (room == null) {
-                System.out.println("Sorry, no available room");
-            } else {
-                System.out.println("You can book room " + room.roomNumber);
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
+        Date start = dateUtils.getDateFromString(startDate);
+        Date end = dateUtils.getDateFromString(endDate);
+        Room room = hotel.getRoom(start, end, beds);
+        if (room == null) {
+            ioManager.printMessage("Sorry, no available room");
+        } else {
+            ioManager.printMessage("You can book room " + room.roomNumber);
         }
     }
 
     private void reservationReport() {
-        System.out.println("Enter start date dd/MM/yyyy");
-        String startDate = input.next();
-        System.out.println("Enter end date dd/MM/yyyy");
-        String endDate = input.next();
+        String startDate = ioManager.readStartDate();
+        String endDate = ioManager.readEndDate();
 
-        try {
-            Date start = new SimpleDateFormat("dd/MM/yyyy").parse(startDate);
-            Date end = new SimpleDateFormat("dd/MM/yyyy").parse(endDate);
-            hotel.getReservationReport(start, end);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        Date start = dateUtils.getDateFromString(startDate);
+        Date end = dateUtils.getDateFromString(endDate);
+
+        Map<Integer, Integer> reservationReport = hotel.getReservationReport(start, end);
+        ioManager.printRoomBusyDays(reservationReport);
     }
 
     private void removeAllReservationForARoom() {
-        System.out.println("Enter room number");
-        int roomNumber = input.nextInt();
+        int roomNumber = ioManager.readRoomNumber();
         hotel.removeAllReservations(roomNumber);
     }
 
     private void showEmptyRooms() {
-        System.out.println("Enter start date dd/MM/yyyy");
-        String startDate = input.next();
-        System.out.println("Enter end date dd/MM/yyyy");
-        String endDate = input.next();
+        String startDate = ioManager.readStartDate();
+        String endDate = ioManager.readEndDate();
 
-        try {
-            Date start = new SimpleDateFormat("dd/MM/yyyy").parse(startDate);
-            Date end = new SimpleDateFormat("dd/MM/yyyy").parse(endDate);
-            ArrayList<Room> emptyRooms = hotel.getEmptyRooms(start, end);
-            for (Room room : emptyRooms) {
-                System.out.println("empty room " + room.roomNumber);
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
+        Date start = dateUtils.getDateFromString(startDate);
+        Date end = dateUtils.getDateFromString(endDate);
+        ArrayList<Room> emptyRooms = hotel.getEmptyRooms(start, end);
+        for (Room room : emptyRooms) {
+            ioManager.printMessage("empty room " + room.roomNumber);
         }
     }
 
     public void reserve() {
-        System.out.println("Enter room number");
-        int roomNumber = input.nextInt();
-        System.out.println("Enter start date dd/MM/yyyy");
-        String startDate = input.next();
-        System.out.println("Enter end date dd/MM/yyyy");
-        String endDate = input.next();
-        System.out.println("Enter your name");
-        String guestName = input.next();
-        System.out.println("Do you want baby bed,breakfast or sea view");
-        String specialWish = input.next();
+        int roomNumber = ioManager.readRoomNumber();
+//        input.nextLine();
+        String startDate = ioManager.readStartDate();
+        String endDate = ioManager.readEndDate();
+        String guestName = ioManager.readGuestName();
+        String specialWish = ioManager.readGuestPreferences();
 
-        try {
-            Date start = new SimpleDateFormat("dd/MM/yyyy").parse(startDate);
-            Date end = new SimpleDateFormat("dd/MM/yyyy").parse(endDate);
-            boolean isSuccess = hotel.reserve(roomNumber, start, end, guestName, specialWish);
-            if (isSuccess) {
-                System.out.println("Successful reservation");
-            } else {
-                System.out.println("The room is busy");
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
+        Date start = dateUtils.getDateFromString(startDate);
+        Date end = dateUtils.getDateFromString(endDate);
+        boolean isSuccess = hotel.reserve(roomNumber, start, end, guestName, specialWish);
+        if (isSuccess) {
+            ioManager.printMessage("Successful reservation");
+        } else {
+            ioManager.printMessage("The room is busy");
         }
     }
 }

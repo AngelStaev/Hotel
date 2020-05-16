@@ -2,21 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8d75acaa-98cc-4345-97b6-b4486984a0ba" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/DateUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/IOManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/DateUtilsTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/IOManagerTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hotel.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Hotel.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Hotel/Hotel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Hotel/Hotel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Hotel/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Hotel/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Hotel/Menu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Hotel/Menu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Hotel/Room.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Hotel/Room.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Hotel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hotel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Reservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Reservation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Room.java" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution>
+      <executable />
+    </execution>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -36,36 +45,88 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Velislav/projectHotel" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
-  <component name="RunManager">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="JUnit.DateUtilsTests.testDateFromString_ShouldReturnDate_WithDifferentDateFormat">
+    <configuration name="DateUtilsTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Hotel" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="DateUtilsTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DateUtilsTests.testDateFromString_ShouldReturnDate_WithDifferentDateFormat" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Hotel" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="DateUtilsTests" />
+      <option name="METHOD_NAME" value="testDateFromString_ShouldReturnDate_WithDifferentDateFormat" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DateUtilsTests.testDateFromString_ShouldReturnNull_InvalidDate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Hotel" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="DateUtilsTests" />
+      <option name="METHOD_NAME" value="testDateFromString_ShouldReturnNull_InvalidDate" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DateUtilsTests.testDateFromString_ShouldReturnThrow_WithDifferentDateFormat" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Hotel" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="DateUtilsTests" />
+      <option name="METHOD_NAME" value="testDateFromString_ShouldReturnThrow_WithDifferentDateFormat" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DateUtilsTests.testDateFromString_ShouldReturnThrow_WithNullParameter" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Hotel" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="DateUtilsTests" />
+      <option name="METHOD_NAME" value="testDateFromString_ShouldReturnThrow_WithNullParameter" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.DateUtilsTests.testDateFromString_ShouldReturnDate_WithDifferentDateFormat" />
+        <item itemvalue="JUnit.DateUtilsTests.testDateFromString_ShouldReturnThrow_WithDifferentDateFormat" />
+        <item itemvalue="JUnit.DateUtilsTests.testDateFromString_ShouldReturnNull_InvalidDate" />
+        <item itemvalue="JUnit.DateUtilsTests" />
+        <item itemvalue="JUnit.DateUtilsTests.testDateFromString_ShouldReturnThrow_WithNullParameter" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -77,8 +138,26 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1589441361156</updated>
+      <workItem from="1589610732033" duration="532000" />
+      <workItem from="1589611382377" duration="8855000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="WindowStateProjectService">
     <state x="510" y="113" key="#com.intellij.ide.util.MemberChooser" timestamp="1589574979547">
