@@ -1,36 +1,72 @@
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
 public class Room {
 
-    private int roomNumber;
-    private String dateOfRent;
-    private String dateOfRelease;
-    private String roomView;
-    private String comment;
-    private boolean isFree;
-    private byte numberOfBeds;
-    private boolean hasBabyBed;
+    int roomNumber;
+    int beds;
+    List<Reservation> reservations;
 
-    public Room(int roomNumber, String dateOfRent, String dateOfRelease, String roomView, String comment, boolean isFree, byte numberOfBeds, boolean hasBabyBed) {
+    public Room(int roomNumber, int beds) {
         this.roomNumber = roomNumber;
-        this.dateOfRent = dateOfRent;
-        this.dateOfRelease = dateOfRelease;
-        this.roomView = roomView;
-        this.comment = comment;
-        this.isFree = isFree;
-        this.numberOfBeds = numberOfBeds;
-        this.hasBabyBed = hasBabyBed;
+        this.beds = beds;
+        this.reservations = new ArrayList<>();
     }
 
-    public Room(int roomNumber, String dateOfRent, String dateOfRelease, byte numberOfBeds) {
-        this.roomNumber = roomNumber;
-        this.dateOfRent = dateOfRent;
-        this.dateOfRelease = dateOfRelease;
-        this.numberOfBeds = numberOfBeds;
+    public boolean addReservation(Calendar start, Calendar end, String name, String specialWish) {
+        boolean available = isAvailable(start, end);
+        if (available) {
+            Reservation reservation = new Reservation(start, end, name, specialWish);
+            reservations.add(reservation);
+        }
+
+        return available;
     }
 
-    public Room() {
+    public boolean isAvailable(Calendar start, Calendar end) {
+        boolean canNotReserve = false;
+        for (Reservation reservation : reservations) {
+            canNotReserve =
+                    (reservation.getEnd().after(start) && reservation.getStart().before(start)) ||
+                            (reservation.getStart().before(end) && reservation.getEnd().after(start));
+            if (canNotReserve) {
+                break;
+            }
+        }
+
+        return !canNotReserve;
     }
 
-    public void getDetails() {
+    public void removeReservations() {
+        this.reservations = new ArrayList<>();
+    }
 
+    public int getBusyDays(Calendar start, Calendar end) {
+        //TODO bug when reservation start == period start
+        //and reservation end is equal or bidder than the end period
+        int busyDays = 0;
+        for (Reservation reservation : reservations) {
+            if (reservation.getStart().before(start)
+                    && reservation.getEnd().after(start)) {//reservation start before start, reservetion end after start
+                busyDays += Duration.between(start.toInstant(), reservation.getEnd().toInstant()).toDays();
+            } else if (reservation.getStart().after(start) &&
+                    reservation.getEnd().before(end)) {//res start after start, res end before end
+                busyDays += Duration.between(reservation.getStart().toInstant(), reservation.getEnd().toInstant()).toDays();
+            } else if (reservation.getStart().before(end) &&
+                    reservation.getEnd().after(end)) {// res start before end res end after end
+                busyDays += Duration.between(reservation.getStart().toInstant(), end.toInstant()).toDays();
+            } else if (reservation.getStart().before(start) &&
+                    reservation.getEnd().after(end)) {// res start before start, res end after end
+                busyDays += Duration.between(start.toInstant(), end.toInstant()).toDays();
+            }
+        }
+
+        return busyDays;
+    }
+
+    public boolean isAvailable(Calendar startDate, Calendar endDate, int bedNumber) {
+        return isAvailable(startDate, endDate) && this.beds >= bedNumber;
     }
 }
